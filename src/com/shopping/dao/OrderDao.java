@@ -15,7 +15,7 @@ import com.shopping.domain.Order;
  * Created by rishabhsheoran on 1/31/17.
  */
 public interface OrderDao {
-    public void createOrder(String[] str) throws IOException, SQLException, ParseException;
+    public void createOrder(Order order) throws IOException, SQLException, ParseException;
     public void deleteOrder(int id) throws SQLException;
     public void updateOrder(int id, String orderDate,int userId) throws SQLException, ParseException;
     public void updateOrderAmount(int id) throws SQLException;

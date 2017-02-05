@@ -21,21 +21,18 @@ import com.shopping.utils.DBConnection;
  */
 public class ProductDaoImpl implements ProductDao {
     @Override
-    public void createProduct(String[] str) throws IOException, SQLException {
+    public void createProduct(Product prod) throws IOException, SQLException {
         Connection con = DBConnection.getConnection();
         PreparedStatement ps=null;
-        for (String st:str
-                ) {
-           // System.out.println(st);
-            String[] entry = st.split(",");
+
             ps = con.prepareStatement("Insert into product (name,code,price,stock) VALUES (?,?,?,?)");
-            ps.setString(1, entry[0]);
+            ps.setString(1,prod.getName() );
            // System.out.println(entry[0]);
-            ps.setString(2, entry[1]);
-            ps.setBigDecimal(3, new BigDecimal(entry[2]));
-            ps.setInt(4, Integer.parseInt(entry[3]));
+            ps.setString(2, prod.getCode());
+            ps.setBigDecimal(3, prod.getPrice());
+            ps.setInt(4, prod.getStock());
             ps.executeUpdate();
-        }
+
 
         // con.commit();
 

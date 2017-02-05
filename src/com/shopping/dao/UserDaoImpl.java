@@ -22,22 +22,19 @@ import com.shopping.utils.DBConnection;
 public class UserDaoImpl implements UserDao {
 
     @Override
-    public void createUser(String[] str) throws IOException, SQLException {
+    public void createUser(User user) throws IOException, SQLException {
         Connection con = DBConnection.getConnection();
         PreparedStatement ps=null;
 
-        for (String st:str
-             ) {
-           // System.out.println(st);
-            String[] entry = st.split(",");
+
             ps = con.prepareStatement("Insert into user (user_name,first_name,last_name,address) VALUES (?,?,?,?)");
-            ps.setString(1, entry[0]);
+            ps.setString(1, user.getUserName());
             //System.out.println(entry[0]);
-            ps.setString(2, entry[1]);
-            ps.setString(3, entry[2]);
-            ps.setString(4, entry[3]);
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getLastName());
+            ps.setString(4, user.getAddress());
             ps.executeUpdate();
-        }
+
 
         // con.commit();
 

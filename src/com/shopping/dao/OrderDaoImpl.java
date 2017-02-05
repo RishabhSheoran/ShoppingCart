@@ -35,23 +35,19 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void createOrder(String[] str) throws IOException, SQLException, ParseException {
+    public void createOrder(Order order) throws IOException, SQLException, ParseException {
         Connection con = DBConnection.getConnection();
         PreparedStatement ps=null;
         //List<OrderDetail> orderDetailList = orderDetailDao.getOrderDetailsByOrderId();
-        for (String st:str
-                ) {
-           // System.out.println(st);
-            String[] entry = st.split(",");
+
             ps = con.prepareStatement("Insert into orders (orderDate,userId) VALUES (?,?)");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date = sdf.parse(entry[0]);
-            ps.setDate(1,new java.sql.Date(date.getTime()) );
+
+            ps.setDate(1, (Date) order.getOrderDate());
            // System.out.println(entry[0]);
           //  ps.setBigDecimal(2, new BigDecimal(entry[1]));
-            ps.setInt(2, Integer.parseInt(entry[1]) );
+            ps.setInt(2, order.getUserId() );
             ps.executeUpdate();
-        }
+
 
         // con.commit();
 
