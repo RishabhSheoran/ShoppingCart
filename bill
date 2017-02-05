@@ -1,0 +1,4 @@
+OrderId,UserId,FirstName,LastName,ProductName,ProductCode,Quantity,Price,Amount
+1,1,mehak,kaur,Prod1,#a1,6,100.00,600.00
+Prod1,#a1,5,100.00,500.00
+1100.00
