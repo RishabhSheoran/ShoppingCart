@@ -55,8 +55,18 @@ public class OrderServiceImpl implements OrderService {
         s=sb.toString();
         //  System.out.println(s);
         String[] str = s.split("\n");
-        orederDao.createOrder(str);
-
+        //orederDao.createOrder(str);
+        for (String st:str
+                ) {
+            Order order = new Order();
+            // System.out.println(st);
+            String[] entry = st.split(",");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = sdf.parse(entry[0]);
+            order.setOrderDate(new java.sql.Date(date.getTime()));
+            order.setUserId(Integer.parseInt(entry[1]));
+            orederDao.createOrder(order);
+        }
     }
 
     @Override

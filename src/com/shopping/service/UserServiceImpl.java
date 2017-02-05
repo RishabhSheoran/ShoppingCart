@@ -34,9 +34,18 @@ public class UserServiceImpl implements UserService{
         s=sb.toString();
         //System.out.println(s);
         String[] str = s.split("\n");
-        userDao.createUser(str);
-
-
+       // userDao.createUser(str);
+        for (String st:str
+                ) {
+            // System.out.println(st);
+            User user = new User();
+            String[] entry = st.split(",");
+            user.setUserName( entry[0]);
+            user.setFirstName(entry[1]);
+            user.setLastName(entry[2]);
+            user.setAddress(entry[3]);
+            userDao.createUser(user);
+        }
     }
 
     @Override

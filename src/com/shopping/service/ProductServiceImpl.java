@@ -43,8 +43,18 @@ public class ProductServiceImpl implements ProductService{
         s=sb.toString();
         System.out.println(s);
         String[] str = s.split("\n");
-        productDao.createProduct(str);
-
+        //productDao.createProduct(str);
+        for (String st:str
+                ) {
+            Product prod = new Product();
+            // System.out.println(st);
+            String[] entry = st.split(",");
+            prod.setName(entry[0]);
+            prod.setCode(entry[1]);
+            prod.setPrice(new BigDecimal(entry[2]));
+            prod.setStock(Integer.parseInt(entry[3]));
+            productDao.createProduct(prod);
+        }
     }
 
     @Override
